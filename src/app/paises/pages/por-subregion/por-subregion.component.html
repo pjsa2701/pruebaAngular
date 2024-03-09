@@ -1,0 +1,32 @@
+
+<div class="animate__animated animate__fadeIn animate__faster">
+        <h2>BUSCAR POR SUBREGION:  {{ subregionSeleccionada | uppercase }} </h2>
+        
+    </div> 
+    
+    <hr>
+        
+    <div>
+            <h3>Seleccione la subregion</h3>
+                    <button *ngFor="let subregion of subregiones"
+                        [class]="cambiarColorBoton( subregion )"
+                        (click)="seleccionarSubregion( subregion )"
+                        >
+                        {{ subregion | titlecase }}
+            </button>
+    </div>
+    
+    
+    
+    <hr>
+    
+    <app-loading *ngIf="loading"></app-loading>
+
+    <div *ngIf="hayError" class="alert alert-danger">
+        No se han podido cargar los paises pertenecientes a esta subregion.
+        </div>
+    
+    <div *ngIf="paises.length > 0">
+            <app-tabla-paises [paises]="paises"></app-tabla-paises>
+    </div>
+    

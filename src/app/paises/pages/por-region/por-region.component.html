@@ -1,0 +1,29 @@
+
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h2>BUSCAR POR REGION:  {{ regionSeleccionada | uppercase }} </h2>
+    
+</div> 
+
+<hr>
+    
+<div>
+        <h3>Seleccione la region</h3>
+                <button *ngFor="let region of regiones"
+                    [class]="cambiarColorBoton( region )"
+                    (click)="seleccionarRegion( region )"
+                    >
+                    {{ region | titlecase }}
+        </button>
+</div>
+
+<hr>
+
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="hayError" class="alert alert-danger">
+        No se han podido cargar los paises pertenecientes a esta region.
+</div>
+
+<div *ngIf="paises.length > 0">
+        <app-tabla-paises [paises]="paises"></app-tabla-paises>
+</div>

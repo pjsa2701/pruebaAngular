@@ -1,0 +1,42 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h2>BUSCAR POR NOMBRE: {{nombrePais | uppercase}} </h2>
+
+    <hr>
+
+    <div>
+        <app-barra-busqueda
+            (onEnter)="buscarPorNombre( $event )"
+            (onDebounce)="obtenerSugerencias( $event )"
+            placeholder="Ingrese el nombre de un país..."
+            >
+        </app-barra-busqueda>
+    </div>
+    
+    <ul *ngIf="mostrarSugerencias"
+        class="list-group">
+        <li *ngFor="let pais of paisesSugerencias"
+            class="list-group-item list-group-item-action"
+            [routerLink]="['/pais', pais.cca2]"
+            >
+                {{ pais.name.common }}
+        </li>
+        <li class="list-group-item list-group-item-action"
+            (click)="buscarPorNombre( nombrePais )"
+            >
+                Buscar "{{ nombrePais }}"
+        </li>
+    </ul>
+
+    <hr>
+
+    <app-loading *ngIf="loading"></app-loading>
+    
+    <div *ngIf="hayError" class="alert alert-danger">
+        No se encontró nada con el término {{ nombrePais }}
+    </div>
+
+    <div *ngIf="paises.length > 0">
+        <app-tabla-paises [paises]="paises"></app-tabla-paises>
+    </div>
+
+</div>

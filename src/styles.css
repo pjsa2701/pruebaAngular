@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+li {
+    cursor: pointer;
+  }
+
+.small-flag {
+    width: 50px;
+}
+
+.mr-1 {
+    margin-right: 5px;
+}
+
+button {
+    margin: 5px;
+}
