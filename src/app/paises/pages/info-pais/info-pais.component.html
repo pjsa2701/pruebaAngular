@@ -1,11 +1,59 @@
 
 
-<div *ngIf="!pais; else divPais"  
+<div *ngIf="!pais; else templatePais"  
     class="alert alert-info">
     Espere por favor...
 </div>
 
 
-<ng-template #divPais>
+<ng-template #templatePais>
+
+    <div class="row">
+        <div class="col-12">
+            <h1>País: <small>{{ pais.name.common }}</small></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-4">
+            <h3>Bandera</h3>
+            <img [src]="pais.flags.png" class="img-thumbnail" />
+        </div>
+
+        <div class="col">
+            <h3>Información</h3>
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <strong>Capital</strong> {{ pais.capital}}
+                </li>
+                <li class="list-group-item">
+                    <strong>Población</strong> {{ pais.population | number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Codigos</strong> {{ pais.cca2 }} - {{ pais.cca3 }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Region</strong> {{ pais.region }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Subregion</strong> {{ pais.subregion }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Area</strong> {{ pais.area |number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Independiente</strong> {{ pais.independent }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Status</strong> {{ pais.status }}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
     {{ pais | json }}
+
 </ng-template>

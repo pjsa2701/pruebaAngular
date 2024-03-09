@@ -17,8 +17,8 @@ export class PaisesService {
     return new HttpParams().set( 'fields', 'flags,name,capital,population,area,region,subregion,cca2' );
   }
 
-  buscarPorNombre( termino: string ): Observable<Pais[]> {
-    const url = `${ this.apiUrl }/name/${ termino }`;
+  buscarPorNombre( nombre: string ): Observable<Pais[]> {
+    const url = `${ this.apiUrl }/name/${ nombre }`;
     return this.httpClient.get<Pais[]>( url, { params: this.httpParams } );
   }
 
@@ -27,8 +27,8 @@ export class PaisesService {
     return this.httpClient.get<Pais[]>( url, { params: this.httpParams });
   }
 
-  buscarPorSubregion( region: string ): Observable<Pais[]> {
-    const url = `${ this.apiUrl }/subregion/${ region }`;
+  buscarPorSubregion( subregion: string ): Observable<Pais[]> {
+    const url = `${ this.apiUrl }/subregion/${ subregion }`;
     return this.httpClient.get<Pais[]>( url, { params: this.httpParams } );
   }
 
