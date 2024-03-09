@@ -4,10 +4,16 @@ import { Pais } from '../../interfaces/pais.interface';
 @Component({
   selector: 'app-tabla-paises',
   templateUrl: './tabla-paises.component.html',
-  styleUrls: ['./tabla-paises.component.css']
+  styleUrls: ['./tabla-paises.component.css'],
 })
 export class TablaPaisesComponent {
 
-  @Input() paises: Pais[] =[];
-
+  /**
+   * Lista de países que se mostrarán en la tabla.
+   *
+   * @remarks
+   * Esta propiedad está decorada con @Input(), lo que significa que puede recibir
+   * datos desde el componente padre que utiliza este componente.
+   */
+  @Input() paises: Pais[] = [];
 }

@@ -1,8 +1,12 @@
-<form (ngSubmit)="buscar()" autocomplete="true">
-    <input type="text"
-           name="termino"
-           class="form-control"
-           [(ngModel)]="termino"
-           (input)="teclaPresionada()"
-           [placeholder]="placeholder"/>
+<!-- Formulario de búsqueda con función asociada al evento ngSubmit -->
+<form (ngSubmit)="buscar()" autocomplete="on">
+  <!-- Campo de entrada de texto para el término de búsqueda -->
+  <input
+    type="text"
+    name="termino"
+    class="form-control"
+    [(ngModel)]="termino"
+    (input)="teclaPresionada()"
+    [placeholder]="placeholder"
+  />
 </form>

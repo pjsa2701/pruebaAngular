@@ -1,42 +1,49 @@
-<div class="animate__animated animate__fadeIn animate__faster">
-    <h2>BUSCAR POR NOMBRE: {{nombrePais | uppercase}} </h2>
+<div>
+  <h2>BUSCAR POR NOMBRE: {{ nombrePais | uppercase }}</h2>
 
-    <hr>
+  <hr />
 
-    <div>
-        <app-barra-busqueda
-            (onEnter)="buscarPorNombre( $event )"
-            (onDebounce)="obtenerSugerencias( $event )"
-            placeholder="Ingrese el nombre de un país..."
-            >
-        </app-barra-busqueda>
-    </div>
-    
-    <ul *ngIf="mostrarSugerencias"
-        class="list-group">
-        <li *ngFor="let pais of paisesSugerencias"
-            class="list-group-item list-group-item-action"
-            [routerLink]="['/pais', pais.cca2]"
-            >
-                {{ pais.name.common }}
-        </li>
-        <li class="list-group-item list-group-item-action"
-            (click)="buscarPorNombre( nombrePais )"
-            >
-                Buscar "{{ nombrePais }}"
-        </li>
-    </ul>
+  <div>
+    <app-barra-busqueda
+      (onEnter)="buscarPorNombre($event)"
+      (onDebounce)="obtenerSugerencias($event)"
+      placeholder="Ingrese el nombre de un país..."
+    >
+    </app-barra-busqueda>
+  </div>
 
-    <hr>
+   <!-- Lista de sugerencias de países -->
+  <ul *ngIf="mostrarSugerencias" class="list-group">
+    <li
+      *ngFor="let pais of paisesSugerencias"
+      class="list-group-item list-group-item-action"
+      [routerLink]="['/pais', pais.cca2]"
+    >
+     <!-- Nombre común del país con enlace a la página de detalles del país -->
+      {{ pais.name.common }}
+    </li>
+    <!-- Elemento de la lista para realizar una búsqueda completa -->
+    <li
+      class="list-group-item list-group-item-action"
+      (click)="buscarPorNombre(nombrePais)"
+    >
+    <!-- Mensaje para realizar la búsqueda completa -->
+      Buscar "{{ nombrePais }}"
+    </li>
+  </ul>
 
-    <app-loading *ngIf="loading"></app-loading>
-    
-    <div *ngIf="hayError" class="alert alert-danger">
-        No se encontró nada con el término {{ nombrePais }}
-    </div>
+  <hr />
 
-    <div *ngIf="paises.length > 0">
-        <app-tabla-paises [paises]="paises"></app-tabla-paises>
-    </div>
+  <!-- Componente de carga que se muestra mientras se realiza una solicitud -->
+  <app-loading *ngIf="loading"></app-loading>
 
+  <!-- Mensaje de error en caso de que no se encuentre ningún país con el término ingresado -->
+  <div *ngIf="hayError" class="alert alert-danger">
+    No se encontró nada con el término {{ nombrePais }}
+  </div>
+
+  <!-- Tabla de países que se muestra si hay países cargados -->
+  <div *ngIf="paises.length > 0">
+    <app-tabla-paises [paises]="paises"></app-tabla-paises>
+  </div>
 </div>

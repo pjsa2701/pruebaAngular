@@ -1,21 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from './menu/menu.component';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 import { LoadingComponent } from './loading/loading.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [
-    MenuComponent,
-    LoadingComponent
-  ],
-  exports: [
-    MenuComponent,
-    LoadingComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ]
+  declarations: [LoadingComponent, MenuComponent],
+  exports: [LoadingComponent, MenuComponent],
+  imports: [CommonModule, RouterModule],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,60 +1,68 @@
-
-
-<div *ngIf="!pais; else templatePais"  
-    class="alert alert-info">
-    Espere por favor...
+<!-- Sección de carga mientras se obtiene la información del país -->
+<div *ngIf="!pais; else templatePais">
+  <app-loading></app-loading>
 </div>
 
+<!-- Sección de error si no se puede cargar la información del país -->
+<div *ngIf="hayError" class="alert alert-danger">
+  No se han podido cargar los paises pertenecientes a esta region desde la API.
+</div>
+
+<!-- Plantilla para mostrar la información del país -->
+<!--
+     * Existe una incógnita ya que al cargar el componente la variable pais se encuentra seteada 
+     * con los valores que llegan de la API
+     * 
+     * Se pueden mostrar con el pipe JSON, pero no se pueden acceder a sus atributos mediante {{}}
+     * la interpolación de cadenas o expresiones dentro de las plantillas (templates) HTML
+-->
 
 <ng-template #templatePais>
-    
-    <div class="row">
-        <div class="col-12">
-            <h1>País: <small>{{ pais.name.common }}</small></h1>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <h1>
+        País: <small>{{ pais.name.common }}</small>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <h3>Bandera</h3>
+      <img [src]="pais.flags.png" class="img-thumbnail" />
     </div>
 
-    <div class="row">
-        
-        <div class="col-4">
-            <h3>Bandera</h3>
-            <img [src]="pais.flags.png" class="img-thumbnail" />
-        </div>
-
-        <div class="col">
-            <h3>Información</h3>
-            <ul class="list-group">
-
-                <li class="list-group-item">
-                    <strong>Capital</strong> {{ pais.capital}}
-                </li>
-                <li class="list-group-item">
-                    <strong>Población</strong> {{ pais.population | number }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Codigos</strong> {{ pais.cca2 }} - {{ pais.cca3 }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Region</strong> {{ pais.region }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Subregion</strong> {{ pais.subregion }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Area</strong> {{ pais.area |number }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Independiente</strong> {{ pais.independent }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Status</strong> {{ pais.status }}
-                </li>
-            </ul>
-        </div>
-
-
+    <div class="col">
+      <h3>Información</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Capital</strong> {{ pais.capital }}
+        </li>
+        <li class="list-group-item">
+          <strong>Población</strong> {{ pais.population | number }}
+        </li>
+        <li class="list-group-item">
+          <strong>Codigos</strong> {{ pais.cca2 }} - {{ pais.cca3 }}
+        </li>
+        <li class="list-group-item">
+          <strong>Region</strong> {{ pais.region }}
+        </li>
+        <li class="list-group-item">
+          <strong>Subregion</strong> {{ pais.subregion }}
+        </li>
+        <li class="list-group-item">
+          <strong>Area</strong> {{ pais.area | number }}
+        </li>
+        <li class="list-group-item">
+          <strong>Independiente</strong> {{ pais.independent }}
+        </li>
+        <li class="list-group-item">
+          <strong>Status</strong> {{ pais.status }}
+        </li>
+      </ul>
     </div>
-
+  </div>
 </ng-template>
 
+<!-- Muestra la información completa del país en formato JSON (para fines de depuración) -->
 {{ pais | json }}

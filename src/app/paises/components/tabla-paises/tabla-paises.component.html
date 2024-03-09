@@ -1,31 +1,34 @@
-<table class="table table-hover animate__animated animate__fadeIn animate__faster">
+<!-- Tabla que muestra información detallada de países -->
+<table class="table table-hover">
+  <!-- Encabezados de la tabla -->
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Bandera</th>
+      <th>Nombre</th>
+      <th>Capital</th>
+      <th>Población</th>
+      <th>Area</th>
+      <th>Region</th>
+      <th>Subregion</th>
+    </tr>
+  </thead>
 
-    <thead>
-        <tr>
-            <th> # </th>
-            <th> Bandera </th>
-            <th> Nombre </th>
-            <th> Capital </th>
-            <th> Población </th>
-            <th> Area </th>
-            <th> Region </th>
-            <th> Subregion </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr *ngFor="let pais of paises; let i = index"
-            [routerLink]="['/pais', pais.cca2]"
-            >
-            <td> {{ i + 1 }} </td>
-            <td> <img class="small-flag" [src]="pais.flags.png"> </td>
-            <td> {{ pais.name.common }} </td>
-            <td> {{ pais.capital }} </td>
-            <td> {{ pais.population | number }} </td>
-            <td> {{ pais.area | number }} km²</td>
-            <td> {{ pais.region }} </td>
-            <td> {{pais.subregion}} </td>
-        </tr>
-    </tbody>
-
+  <!-- Cuerpo de la tabla con animación de entrada -->
+  <tbody class="animate__animated animate__fadeIn animate__slower">
+    <!-- Iteración sobre la lista de países para mostrar cada uno en una fila -->
+    <tr
+      *ngFor="let pais of paises; let i = index"
+      [routerLink]="['/pais', pais.cca2]"
+    >
+      <td>{{ i + 1 }}</td>
+      <td><img class="small-flag" [src]="pais.flags.png" /></td>
+      <td>{{ pais.name.common }}</td>
+      <td>{{ pais.capital }}</td>
+      <td>{{ pais.population | number }}</td>
+      <td>{{ pais.area | number }} km²</td>
+      <td>{{ pais.region }}</td>
+      <td>{{ pais.subregion }}</td>
+    </tr>
+  </tbody>
 </table>

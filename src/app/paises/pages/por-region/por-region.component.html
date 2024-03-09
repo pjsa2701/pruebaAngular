@@ -1,29 +1,29 @@
-
-<div class="animate__animated animate__fadeIn animate__faster">
-    <h2>BUSCAR POR REGION:  {{ regionSeleccionada | uppercase }} </h2>
-    
-</div> 
-
-<hr>
-    
 <div>
-        <h3>Seleccione la region</h3>
-                <button *ngFor="let region of regiones"
-                    [class]="cambiarColorBoton( region )"
-                    (click)="seleccionarRegion( region )"
-                    >
-                    {{ region | titlecase }}
-        </button>
-</div>
+  <h2>BUSCAR POR REGION: {{ regionSeleccionada | uppercase }}</h2>
 
-<hr>
+  <hr />
 
-<app-loading *ngIf="loading"></app-loading>
+  <h6>SELECCIONE LA REGION</h6>
+  <button
+    *ngFor="let region of regiones"
+    [class]="cambiarColorBoton(region)"
+    (click)="seleccionarRegion(region)"
+  >
+    {{ region | titlecase }}
+  </button>
 
-<div *ngIf="hayError" class="alert alert-danger">
-        No se han podido cargar los paises pertenecientes a esta region.
-</div>
+  <hr />
 
-<div *ngIf="paises.length > 0">
-        <app-tabla-paises [paises]="paises"></app-tabla-paises>
+  <!-- Componente de carga que se muestra mientras se realiza una solicitud -->
+  <app-loading *ngIf="loading"></app-loading>
+
+  <!-- Mensaje de error en caso de que no se puedan cargar los países -->
+  <div *ngIf="hayError" class="alert alert-danger">
+    No se han podido cargar los paises pertenecientes a esta region.
+  </div>
+
+  <!-- Tabla de países que se muestra si hay países cargados -->
+  <div *ngIf="paises.length > 0">
+    <app-tabla-paises [paises]="paises"></app-tabla-paises>
+  </div>
 </div>
