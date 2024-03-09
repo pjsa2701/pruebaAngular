@@ -1,4 +1,7 @@
 # PruebaAngular
+This application, developed with Angular, uses Bootstrap for the design and Animate.css for the animations, offering an interactive and engaging experience to explore country information. It allows searching countries by region, name and sub-regions, showing main listings with full details when selecting an option. In addition, it incorporates a search bar with auto-completion and a load indicator during server requests.
+
+Translated with DeepL.com (free version)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
