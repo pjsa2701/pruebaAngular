@@ -1,9 +1,9 @@
 <div>
-  <h2>BUSCAR POR SUBREGION: {{ subregionSeleccionada | uppercase }}</h2>
+  <h2>SUBREGION: {{ subregionSeleccionada | uppercase }}</h2>
 
   <hr />
 
-  <h6>SELECCIONE LA SUBREGION</h6>
+  <h6>SELECCIONE UNA SUBREGION</h6>
   <button
     *ngFor="let subregion of subregiones"
     [class]="cambiarColorBoton(subregion)"

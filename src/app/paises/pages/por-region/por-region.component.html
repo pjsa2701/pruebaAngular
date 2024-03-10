@@ -1,9 +1,9 @@
 <div>
-  <h2>BUSCAR POR REGION: {{ regionSeleccionada | uppercase }}</h2>
+  <h2>REGION: {{ regionSeleccionada | uppercase }}</h2>
 
   <hr />
 
-  <h6>SELECCIONE LA REGION</h6>
+  <h6>SELECCIONE UNA REGION</h6>
   <button
     *ngFor="let region of regiones"
     [class]="cambiarColorBoton(region)"

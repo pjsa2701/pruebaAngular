@@ -1,5 +1,5 @@
 <div>
-  <h2>BUSCAR POR NOMBRE: {{ nombrePais | uppercase }}</h2>
+  <h2>NOMBRE: {{ nombrePais | uppercase }}</h2>
 
   <hr />
 
@@ -7,7 +7,7 @@
     <app-barra-busqueda
       (onEnter)="buscarPorNombre($event)"
       (onDebounce)="obtenerSugerencias($event)"
-      placeholder="Ingrese el nombre de un país..."
+      placeholder="Escriba el nombre de un país..."
     >
     </app-barra-busqueda>
   </div>
