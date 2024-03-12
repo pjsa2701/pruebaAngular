@@ -13,11 +13,22 @@
      * Existe una incógnita ya que al cargar el componente la variable pais se encuentra seteada 
      * con los valores que llegan de la API
      * 
-     * Se pueden mostrar con el pipe JSON, pero no se pueden acceder a sus atributos mediante {{}}
+     * Se pueden mostrar la información el pipe json {{ pais | json }}, pero no se pueden acceder a sus atributos mediante {{}}
      * la interpolación de cadenas o expresiones dentro de las plantillas (templates) HTML
 -->
 
+<!-- Muestra la información completa del país en formato JSON (para fines de depuración) -->
+<!--{{ pais | json }}-->
+
 <ng-template #templatePais>
+  <div class="row alert alert-danger" role="alert">
+    <b> Problemas de Visualización </b>
+    Se puede mostrar la información usando el pipe JSON
+    <!--{{ pais | json }}-->, pero no se pueden acceder a sus atributos mediante
+    <!--{{}}-->la interpolación de cadenas o expresiones dentro de las
+    plantillas (templates) HTML.
+  </div>
+
   <div class="row">
     <div class="col-12">
       <h1>
@@ -32,7 +43,7 @@
       <img [src]="pais.flags.png" class="img-thumbnail" />
     </div>
 
-    <div class="col">
+    <div class="col mb-3">
       <h3>Información</h3>
       <ul class="list-group">
         <li class="list-group-item">
@@ -63,6 +74,3 @@
     </div>
   </div>
 </ng-template>
-
-<!-- Muestra la información completa del país en formato JSON (para fines de depuración) -->
-{{ pais | json }}
