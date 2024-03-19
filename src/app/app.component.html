@@ -1,12 +1,11 @@
+<!-- Componente de barra de navegación -->
 <app-navbar></app-navbar>
 
+<!-- Contenedor principal utilizando el sistema de rejillas de Bootstrap -->
 <div class="row m-3">
-  <div class="col-2 border border-light-subtle">
-    <app-menu></app-menu>
-    <hr />
-  </div>
-
-  <div class="col-10 border border-light-subtle border-start-0">
+  <!-- Columna con margen inferior -->
+  <div class="col mb-3 border border-success-subtle rounded">
+    <!-- Enrutador de salida para cargar componentes dinámicamente -->
     <router-outlet></router-outlet>
   </div>
 </div>

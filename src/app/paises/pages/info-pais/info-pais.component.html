@@ -1,11 +1,17 @@
+<div fxLayoutAlign="center" class="mt-3 alert alert-danger">
+  <b> Problemas de Visualización: </b>Se puede mostrar la información usando el
+  pipe JSON, pero no se pueden acceder a sus atributos mediante la interpolación
+  de cadenas o expresiones dentro de las plantillas (templates) HTML.
+</div>
+
 <!-- Sección de carga mientras se obtiene la información del país -->
-<div *ngIf="!pais; else templatePais">
-  <app-loading></app-loading>
+<div class="mb-3" fxLayoutAlign="center" *ngIf="!pais && loading; else templatePais">
+  <mat-spinner></mat-spinner>
 </div>
 
 <!-- Sección de error si no se puede cargar la información del país -->
-<div *ngIf="hayError" class="alert alert-danger">
-  No se han podido cargar los paises pertenecientes a esta region desde la API.
+<div fxLayoutAlign="center" *ngIf="hayError" class="alert alert-danger">
+  {{ message }}
 </div>
 
 <!-- Plantilla para mostrar la información del país -->
@@ -20,15 +26,8 @@
 <!-- Muestra la información completa del país en formato JSON (para fines de depuración) -->
 <!--{{ pais | json }}-->
 
+<!--Template empleado para mosar la inforamción al cliente de los diferentes paises.-->
 <ng-template #templatePais>
-  <div class="row alert alert-danger" role="alert">
-    <b> Problemas de Visualización </b>
-    Se puede mostrar la información usando el pipe JSON
-    <!--{{ pais | json }}-->, pero no se pueden acceder a sus atributos mediante
-    <!--{{}}-->la interpolación de cadenas o expresiones dentro de las
-    plantillas (templates) HTML.
-  </div>
-
   <div class="row">
     <div class="col-12">
       <h1>

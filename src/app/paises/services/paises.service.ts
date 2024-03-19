@@ -13,7 +13,66 @@ import { Pais } from '../interfaces/pais.interface';
  * Servicio para interactuar con la API de países.
  */
 export class PaisesService {
+  /**
+   * URL de la API utilizada para obtener datos sobre países.
+   */
   private apiUrl: string = 'https://restcountries.com/v3.1';
+
+  /**
+   * Arreglo de regiones principales.
+   */
+  private _regiones: string[] = [
+    'africa',
+    'americas',
+    'asia',
+    'europe',
+    'oceania',
+  ];
+
+  /**
+   * Método para obtener una copia del arreglo de regiones principales.
+   * @returns Copia del arreglo de regiones principales.
+   */
+  get regiones() {
+    return [...this._regiones];
+  }
+
+  /**
+   * Arreglo de subregiones.
+   */
+  private _subregiones: string[] = [
+    'southern europe',
+    'eastern africa',
+    'western africa',
+    'north america',
+    'polynesia',
+    'south america',
+    'central asia',
+    'southeast europe',
+    'northern europe',
+    'northern africa',
+    'south-eastern asia',
+    'middle africa',
+    'western asia',
+    'central america',
+    'southern asia',
+    'caribbean',
+    'central europe',
+    'micronesia',
+    'western europe',
+    'melanesia',
+    'eastern asia',
+    'southern africa',
+    'australia and new zealand',
+  ];
+
+  /**
+   * Método para obtener una copia del arreglo de subregiones.
+   * @returns Copia del arreglo de subregiones.
+   */
+  get subregiones() {
+    return [...this._subregiones];
+  }
 
   constructor(private httpClient: HttpClient) {}
 

@@ -1,31 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PorNombreComponent } from './paises/pages/por-nombre/por-nombre.component';
-import { PorRegionComponent } from './paises/pages/por-region/por-region.component';
-import { PorSubregionComponent } from './paises/pages/por-subregion/por-subregion.component';
-import { InfoPaisComponent } from './paises/pages/info-pais/info-pais.component';
 
+// Definición de las rutas principales de la aplicación
 const routes: Routes = [
   {
-    path: '',
-    component: PorNombreComponent,
-    pathMatch: 'full',
+    path: 'paises', // Ruta base para el módulo de países
+    loadChildren: () =>
+      import('./paises/paises.module').then((m) => m.PaisesModule), // Carga el módulo de países de forma dinámica
   },
   {
-    path: 'region',
-    component: PorRegionComponent,
-  },
-  {
-    path: 'subregion',
-    component: PorSubregionComponent,
-  },
-  {
-    path: 'pais/:id',
-    component: InfoPaisComponent,
-  },
-  {
-    path: '**',
-    redirectTo: '',
+    path: '**', // Ruta para cualquier otra ruta no definida
+    redirectTo: 'paises', // Redirige a la ruta base de países
   },
 ];
 

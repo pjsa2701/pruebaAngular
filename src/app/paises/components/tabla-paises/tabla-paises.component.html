@@ -1,34 +1,51 @@
-<!-- Tabla que muestra información detallada de países -->
-<table class="table table-hover">
-  <!-- Encabezados de la tabla -->
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Bandera</th>
-      <th>Nombre</th>
-      <th>Capital</th>
-      <th>Población</th>
-      <th>Area</th>
-      <th>Region</th>
-      <th>Subregion</th>
-    </tr>
-  </thead>
+<!-- Componente de paginación --><pagination-controls
+  (pageChange)="page = $event"
+  previousLabel="Anterior"
+  nextLabel="Siguiente"
+></pagination-controls>
 
-  <!-- Cuerpo de la tabla con animación de entrada -->
-  <tbody class="animate__animated animate__fadeIn animate__slower">
-    <!-- Iteración sobre la lista de países para mostrar cada uno en una fila -->
-    <tr
-      *ngFor="let pais of paises; let i = index"
-      [routerLink]="['/pais', pais.cca2]"
-    >
-      <td>{{ i + 1 }}</td>
-      <td><img class="small-flag" [src]="pais.flags.png" /></td>
-      <td>{{ pais.name.common }}</td>
-      <td>{{ pais.capital }}</td>
-      <td>{{ pais.population | number }}</td>
-      <td>{{ pais.area | number }} km²</td>
-      <td>{{ pais.region }}</td>
-      <td>{{ pais.subregion }}</td>
-    </tr>
-  </tbody>
-</table>
+<!-- Contenedor principal utilizando Flex Layout de Angular -->
+<div
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="20px"
+>
+  <!-- Iteración sobre la lista de países paginada -->
+  <div
+    class="animate__animated animate__fadeIn animate__slower mb-3"
+    fxFlex="24"
+    fxFlex.lg="24"
+    fxFlex.sm="12"
+    *ngFor="
+      let pais of paises | paginate : { itemsPerPage: 6, currentPage: page }
+    "
+  >
+    <!-- Directiva ngFor para iterar sobre los países paginados -->
+
+    <!-- Tarjeta de Material Angular -->
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ pais.name.common }}</mat-card-title>
+        <mat-card-subtitle>{{ pais.capital }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image [src]="pais.flags.png" />
+        <p>
+          <b>Population: </b>{{ pais.population | number }} <br />
+          <b>Area: </b>{{ pais.area | number }} km² <br />
+          <b>Region: </b>{{ pais.region }} <br />
+          <b>Subregion: </b>{{ pais.subregion }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          [routerLink]="['/paises', pais.cca2]"
+        >
+          Ver más...
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,8 +1,46 @@
-<nav class="navbar bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink=""
-      ><i class="bi bi-terminal-fill"></i>
-      <h2>APP PAISES</h2>
-    </a>
-  </div>
-</nav>
+<!-- Barra de herramientas de Material con color primario -->
+<mat-toolbar color="primary">
+  <!-- Botón de icono para desencadenar el menú -->
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <!-- Icono de menú -->
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <!-- Menú desplegable -->
+  <mat-menu #menu="matMenu">
+    <!-- Elemento del menú para buscar por nombre -->
+    <button mat-menu-item routerLink="paises/nombre" routerLinkActive="active">
+      <!-- Icono de búsqueda -->
+      <mat-icon>search</mat-icon>
+      <!-- Texto de la opción -->
+      <span>Buscar por nombre</span>
+    </button>
+
+    <!-- Elemento del menú para buscar por región -->
+    <button mat-menu-item routerLink="paises/region" routerLinkActive="active">
+      <!-- Icono de búsqueda -->
+      <mat-icon>search</mat-icon>
+      <!-- Texto de la opción -->
+      <span>Buscar por región</span>
+    </button>
+
+    <!-- Elemento del menú para buscar por subregión -->
+    <button
+      mat-menu-item
+      routerLink="paises/subregion"
+      routerLinkActive="active"
+    >
+      <!-- Icono de búsqueda -->
+      <mat-icon>search</mat-icon>
+      <!-- Texto de la opción -->
+      <span>Buscar por subregión</span>
+    </button>
+  </mat-menu>
+
+  <!-- Título de la aplicación -->
+  APP PAISES
+</mat-toolbar>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Pais } from '../../interfaces/pais.interface';
 import { PaisesService } from '../../services/paises.service';
+import { Messages } from 'src/app/shared/messages/messages';
 
 /**
  * Componente para mostrar y seleccionar países por subregión.
@@ -15,36 +16,15 @@ export class PorSubregionComponent {
   /**
    * Lista de subregiones disponibles.
    */
-  subregiones: string[] = [
-    'southern europe',
-    'eastern africa',
-    'western africa',
-    'north america',
-    'polynesia',
-    'south america',
-    'central asia',
-    'southeast europe',
-    'northern europe',
-    'northern africa',
-    'south-eastern asia',
-    'middle africa',
-    'western asia',
-    'central america',
-    'southern asia',
-    'caribbean',
-    'central europe',
-    'micronesia',
-    'western europe',
-    'melanesia',
-    'eastern asia',
-    'southern africa',
-    'australia and new zealand',
-  ];
+  get subregiones() {
+    return this.paisesService.subregiones;
+  } //Lista de regiones disponibles.
 
-  subregionSeleccionada: string = ''; //Subregión actualmente seleccionada.
+  subregionSeleccionada: string = 'SUBREGION'; //Subregión actualmente seleccionada.
   paises: Pais[] = [];
   loading: boolean = false; //Indica si la carga está en progreso
   hayError: boolean = false; //Indica si se produjo un error durante la carga de países.
+  message: string = '';
 
   /**
    * Constructor del componente PorSubregionComponent.
@@ -77,11 +57,16 @@ export class PorSubregionComponent {
     this.paises = [];
 
     setTimeout(() => {
-      this.loading = false;
-      this.paisesService.buscarPorSubregion(subregion).subscribe(
-        (paises) => (this.paises = paises),
-        (error) => (this.hayError = true)
-      );
-    }, 1500);
+      this.paisesService.buscarPorRegion(subregion).subscribe({
+        next: (paises) => ((this.paises = paises), (this.loading = false)),
+        error: (e) => (
+          (this.paises = []),
+          (this.loading = false),
+          (this.hayError = true),
+          (this.message = Messages.handleResponse(e.status))
+        ),
+        complete: () => console.info('complete'),
+      });
+    }, 1000);
   }
 }

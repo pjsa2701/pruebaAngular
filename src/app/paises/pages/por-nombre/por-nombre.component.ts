@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Pais } from '../../interfaces/pais.interface';
 import { PaisesService } from '../../services/paises.service';
+import { Messages } from 'src/app/shared/messages/messages';
 
 /**
  * Componente para buscar países por nombre.
@@ -12,12 +13,13 @@ import { PaisesService } from '../../services/paises.service';
   styleUrls: ['./por-nombre.component.css'],
 })
 export class PorNombreComponent {
-  nombrePais: string = ''; //Nombre del país ingresado por el usuario.
+  nombrePais: string = 'NOMBRE DEL PAIS'; //Nombre del país ingresado por el usuario.
   paises: Pais[] = [];
   paisesSugerencias: Pais[] = [];
   mostrarSugerencias: boolean = false; //Lista de sugerencias de países basadas en la búsqueda actual.
   loading: boolean = false; //Indica si la carga está en progreso.
   hayError: boolean = false;
+  message: string = '';
 
   /**
    * Constructor del componente PorNombreComponent.
@@ -38,15 +40,17 @@ export class PorNombreComponent {
     this.loading = true;
 
     setTimeout(() => {
-      this.loading = false;
-      this.paisesService.buscarPorNombre(nombrePais).subscribe(
-        (paises) => (this.paises = paises),
-        (error) => {
-          this.hayError = true;
-          this.paises = [];
-        }
-      );
-    }, 1500);
+      this.paisesService.buscarPorNombre(nombrePais).subscribe({
+        next: (paises) => ((this.paises = paises), (this.loading = false)),
+        error: (e) => (
+          (this.paises = []),
+          (this.loading = false),
+          (this.hayError = true),
+          (this.message = Messages.handleResponse(e.status))
+        ),
+        //complete: () => console.info('complete'),
+      });
+    }, 1000);
   }
 
   /**
@@ -59,8 +63,17 @@ export class PorNombreComponent {
     this.nombrePais = nombrePais;
 
     this.paisesService.buscarPorNombre(nombrePais).subscribe(
-      (paises) => (this.paisesSugerencias = paises.splice(0, 10)),
-      (error) => (this.paisesSugerencias = [])
+      {
+        next: (paises) => (this.paises = paises),
+        error: (e) => (
+          (this.paisesSugerencias = []),
+          (this.message = Messages.handleResponse(e.status))
+        ),
+        //complete: () => console.info('complete'),
+      }
+
+      //(paises) => (this.paisesSugerencias = paises.splice(0, 10)),
+      //(error) => (this.paisesSugerencias = [])
     );
   }
 }
