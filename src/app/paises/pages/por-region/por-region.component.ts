@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Pais } from '../../interfaces/pais.interface';
 import { PaisesService } from '../../services/paises.service';
+import { Messages } from 'src/app/shared/messages/messages';
 
 /**
  * Componente para mostrar y seleccionar países por región.
@@ -12,12 +13,14 @@ import { PaisesService } from '../../services/paises.service';
   styleUrls: ['./por-region.component.css'],
 })
 export class PorRegionComponent {
-  
-  regiones: string[] = ['africa', 'americas', 'asia', 'europe', 'oceania']; //Lista de regiones disponibles.
-  regionSeleccionada: string = ''; //rEGIÑON actualmente seleccionada.
+  get regiones() {
+    return this.paisesService.regiones;
+  } //Lista de regiones disponibles.
+  regionSeleccionada: string = 'REGION'; //rEGIÑON actualmente seleccionada.
   paises: Pais[] = [];
   loading: boolean = false; //Indica si la carga está en progreso
   hayError: boolean = false; //Indica si se produjo un error durante la carga de países.
+  message: string = '';
 
   /**
    * Constructor del componente PorSubregionComponent.
@@ -44,17 +47,22 @@ export class PorRegionComponent {
     if (region === this.regionSeleccionada) {
       return;
     }
-
-    this.loading = true;
-    this.regionSeleccionada = region;
     this.paises = [];
+    this.hayError = false;
+    this.regionSeleccionada = region;
+    this.loading = true;
 
     setTimeout(() => {
-      this.loading = false;
-      this.paisesService.buscarPorRegion(region).subscribe(
-        (paises) => (this.paises = paises),
-        (error) => (this.hayError = true)
-      );
-    }, 1500);
+      this.paisesService.buscarPorRegion(region).subscribe({
+        next: (paises) => ((this.paises = paises), (this.loading = false)),
+        error: (e) => (
+          (this.paises = []),
+          (this.loading = false),
+          (this.hayError = true),
+          (this.message = Messages.handleResponse(e.status))
+        ),
+        complete: () => console.info('complete'),
+      });
+    }, 1000);
   }
 }

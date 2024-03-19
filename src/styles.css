@@ -1,17 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
 li {
-    cursor: pointer;
-  }
+  cursor: pointer;
+}
 
 .small-flag {
-    width: 50px;
+  width: 100px;
 }
 
 .mr-1 {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 button {
-    margin: 5px;
+  margin: 5px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-card {
+  margin-top: 20px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-form-field {
+  width: 500px;
 }
