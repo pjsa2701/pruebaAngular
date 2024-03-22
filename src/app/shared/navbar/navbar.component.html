@@ -1,46 +1,19 @@
-<!-- Barra de herramientas de Material con color primario -->
-<mat-toolbar color="primary">
-  <!-- Botón de icono para desencadenar el menú -->
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="menu"
-    aria-label="Example icon-button with a menu"
-  >
-    <!-- Icono de menú -->
-    <mat-icon>more_vert</mat-icon>
+<mat-toolbar role="heading" color="primary">
+  <button mat-icon-button routerLink="paises/">
+    <mat-icon>home</mat-icon></button
+  >APP PAISES
+
+  <span class="example-spacer"></span>
+
+  <button mat-flat-button color="primary" routerLink="paises/nombre">
+    Buscar por nombre
   </button>
 
-  <!-- Menú desplegable -->
-  <mat-menu #menu="matMenu">
-    <!-- Elemento del menú para buscar por nombre -->
-    <button mat-menu-item routerLink="paises/nombre" routerLinkActive="active">
-      <!-- Icono de búsqueda -->
-      <mat-icon>search</mat-icon>
-      <!-- Texto de la opción -->
-      <span>Buscar por nombre</span>
-    </button>
+  <button mat-flat-button color="primary" routerLink="paises/region">
+    Buscar por región
+  </button>
 
-    <!-- Elemento del menú para buscar por región -->
-    <button mat-menu-item routerLink="paises/region" routerLinkActive="active">
-      <!-- Icono de búsqueda -->
-      <mat-icon>search</mat-icon>
-      <!-- Texto de la opción -->
-      <span>Buscar por región</span>
-    </button>
-
-    <!-- Elemento del menú para buscar por subregión -->
-    <button
-      mat-menu-item
-      routerLink="paises/subregion"
-      routerLinkActive="active"
-    >
-      <!-- Icono de búsqueda -->
-      <mat-icon>search</mat-icon>
-      <!-- Texto de la opción -->
-      <span>Buscar por subregión</span>
-    </button>
-  </mat-menu>
-
-  <!-- Título de la aplicación -->
-  APP PAISES
+  <button mat-flat-button color="primary" routerLink="paises/subregion">
+    Buscar por subregión
+  </button>
 </mat-toolbar>

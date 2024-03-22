@@ -37,3 +37,7 @@ mat-card {
 .example-form-field {
   width: 500px;
 }
+
+.navbar{
+  position: fixed;
+}
